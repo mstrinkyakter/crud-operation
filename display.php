@@ -18,7 +18,7 @@ include "server.php";
         <table class="table">
   <thead>
     <tr>
-      <th scope="col">Sl no</th>
+      
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Password</th>
@@ -27,17 +27,31 @@ include "server.php";
     </tr>
   </thead>
 
-<?php
-$sql="SELECT * FROM crud_operation";
+
+  <tbody>
+
+  <?php
+$sql="SELECT * FROM users";
 $result=mysqli_query($conn,$sql);
 if($result){
-    $row = mysqli_fetch_assoc($result);
-    echo $row['name'];
+ while( $row = mysqli_fetch_assoc($result)){
+   
+    $name=$row['name'];
+    $email=$row['email'];
+    $password=$row['password'];
+    $mobile=$row['mobile'];
+    echo '   <tr>
+    
+    <td>'.$name.'</td>
+    <td>'.$email.'</td>
+    <td>'.$password.'</td>
+    <td>'.$mobile.'</td>
+  </tr>';
+ }
 }
 ?>
 
-  <!-- <tbody>
-    <tr>
+    <!-- <tr>
       <th scope="row">1</th>
       <td>Mark</td>
       <td>Otto</td>
@@ -53,8 +67,8 @@ if($result){
       <th scope="row">3</th>
       <td colspan="2">Larry the Bird</td>
       <td>@twitter</td>
-    </tr>
-  </tbody> -->
+    </tr> -->
+  </tbody>
 </table>
     </div>
 </body>

@@ -1,17 +1,20 @@
 <?php
 include 'server.php';
 if(isset($_POST['submit'])){
+    
     $name=$_POST['name'];
     $email=$_POST['email'];
     $password=$_POST['password'];
     $mobile=$_POST['mobile'];
 
-    $sql="INSERT INTO crud_operation(name,email,password,mobile) VALUE ('$name','$email','$password','$mobile')";
+    $sql="INSERT INTO users(name,email,password,mobile) VALUE ('$name','$email','$password','$mobile')";
     $result=mysqli_query($conn,$sql);
-    if(!$result){
-        die (mysqli_error()) ;
+    if($result){
+      header('location:display.php');
     }
-   
+   else{
+    die(mysqli_error($conn)) ;
+   }
 }
 ?>
 
