@@ -13,12 +13,12 @@ include "server.php";
 <body>
     <div class="container">
         
-        <button class="btn btn-primary my-5"> <a href="index.php" class="text-light text-decoration-none">Add User</a> </button>
+        <button class="btn btn-primary my-5"> <a href="user.php" class="text-light text-decoration-none">Add User</a> </button>
 
         <table class="table">
   <thead>
     <tr>
-      
+      <th scope="col">Sl no</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Password</th>
@@ -26,48 +26,34 @@ include "server.php";
       <th scope="col">Operation</th>
     </tr>
   </thead>
-
-
-  <tbody>
-
-  <?php
-$sql="SELECT * FROM users";
+<tbody>
+<?php
+$sql="select* from `crud_table`";
 $result=mysqli_query($conn,$sql);
 if($result){
  while( $row = mysqli_fetch_assoc($result)){
-   
+    $id=$row['Id'];
     $name=$row['name'];
     $email=$row['email'];
     $password=$row['password'];
     $mobile=$row['mobile'];
     echo '   <tr>
-    
+     <th scope="row">'.$id.'</th>
     <td>'.$name.'</td>
     <td>'.$email.'</td>
     <td>'.$password.'</td>
     <td>'.$mobile.'</td>
+    <td>
+        <button class="btn btn-primary" > <a href="update.php? updateid='.$id.'" class="text-light text-decoration-none">Update</a> </button>
+        <button class="btn btn-danger"> <a href="delete.php? deleteid='.$id.'"  class="text-light text-decoration-none">Delete</a> </button>
+    </td>
+   
   </tr>';
  }
 }
 ?>
 
-    <!-- <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr> -->
+
   </tbody>
 </table>
     </div>
