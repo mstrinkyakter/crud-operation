@@ -1,6 +1,14 @@
 <?php
 include 'server.php';
 $id=$_GET['updateid'];
+$sql="select * from `crud_table` where id=$id";
+$result=mysqli_query($conn,$sql);
+$row=mysqli_fetch_assoc($result);
+$name=$row['name'];
+$email=$row['email'];
+$password=$row['password'];
+$mobile=$row['mobile'];
+
 if(isset($_POST['submit'])){
     $name=$_POST['name'];
     $email=$_POST['email'];
@@ -11,9 +19,12 @@ if(isset($_POST['submit'])){
     
     $result=mysqli_query($conn,$sql);
   
-    if(!$result){
-      die(mysqli_error($conn));
+    if($result){
+      header('location:display.php');
     } 
+    else{
+      die(mysqli_error($conn));
+    }
 }
 ?>
 
@@ -30,21 +41,21 @@ if(isset($_POST['submit'])){
     <form class="row g-3" method="post">
    <div class="col-md-6">
     <label class="form-label">Name</label>
-    <input type="text" class="form-control" placeholder="Enter your name" name="name" autocomplete="ogg">
+    <input type="text" class="form-control" placeholder="Enter your name" name="name" autocomplete="off" value=<?php echo $name; ?>>
   </div>
   
   <div class="col-6">
     <label class="form-label">Email</label>
-    <input type="email" class="form-control"  placeholder="Enter your email" name ="email" autocomplete="ogg">
+    <input type="email" class="form-control"  placeholder="Enter your email" name ="email" autocomplete="off" value=<?php echo $email; ?>>
   </div>
  
   <div class="col-md-6">
     <label class="form-label">Password</label>
-    <input type="password" class="form-control" placeholder="Enter your password" name="password" autocomplete="ogg">
+    <input type="password" class="form-control" placeholder="Enter your password" name="password" autocomplete="off" value=<?php echo $password; ?>>
   </div>
   <div class="col-6">
     <label  class="form-label">Mobile</label>
-    <input type="text" class="form-control" placeholder="Enter your mobile number" name="mobile" autocomplete="ogg">
+    <input type="text" class="form-control" placeholder="Enter your mobile number" name="mobile" autocomplete="off" value=<?php echo $mobile; ?>>
   </div>
  
   <div class="col-12">
